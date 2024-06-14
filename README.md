@@ -21,16 +21,11 @@
 ### Semaphore
 
 ### Exchanger
+
+You can find the details about `Exchanger` [here in Exchanger.md](src/main/java/dileepshah/dev/multithreading/exchanger/Exchanger.md).
+
 ### Phaser
 ### Executors
 ### Fork-Join Pool
 
 ### BlockingQueues and 
-
-### 
-```java
-import java.concurrent
-
-```
-
-###
