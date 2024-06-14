@@ -14,7 +14,11 @@ public class LatchesExample {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            System.out.println("Thread 1 counting down...");
+            // Thread will be like: irtualThread[#21]/
+            System.out.println(Thread.currentThread());
+            // Virtual threads are not having a name, so we are using Thread.currentThread().getName() which will return ""
+            System.out.println(String.format("%s counting down... %d",Thread.currentThread().getName(), latch.getCount()));
+
             latch.countDown();
         };
 
@@ -24,13 +28,20 @@ public class LatchesExample {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            System.out.println("Thread 2 counting down...");
+            // Thread will be like: irtualThread[#21]/
+            System.out.println(Thread.currentThread());
+            // Virtual threads are not having a name, so we are using Thread.currentThread().getName() which will return ""
+            System.out.println(String.format("%s counting down... %d",Thread.currentThread().getName(), latch.getCount()));
             latch.countDown();
         };
 
-        ExecutorService executorService = Executors.newFixedThreadPool(2);
+        // Creates virtual thread per task executor, which means each task is executed in a separate thread
+        // What is the benefit of using virtual thread per-task executor?
+        // The benefit of using virtual thread per task executor is that threads are not created until the task is submitted to the executor.
+        ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor();
         executorService.submit(thread1);
         executorService.submit(thread2);
+
         try {
             // Wait for both threads to complete
             System.out.println("Latches waiting...");
