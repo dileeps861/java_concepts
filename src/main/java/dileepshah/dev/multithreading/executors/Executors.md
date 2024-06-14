@@ -198,5 +198,3 @@ try {
 - **Task Management**: Executors provide methods for managing task execution, including scheduling and prioritizing tasks.
 - **Resource Management**: Executors handle resource management, making it easier to control the number of concurrent threads and their resource usage.
 - **Simplified Concurrency**: Executors simplify the process of managing concurrency, allowing developers to focus on the task logic rather than thread management.
-
-By using the `Executor` framework, you can improve the efficiency and scalability of your concurrent applications in Java.
