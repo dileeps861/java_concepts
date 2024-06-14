@@ -18,8 +18,8 @@ public class ThreadWithTryLock implements Runnable {
         // So when deadlock occurs, then because of tryLock() method then thread 2 will not be blocked.
         // Also, upon printing the lock is acquired, then it will print the lock name.
         // Example:
-        // Thread-2 failed to acquire:java.util.concurrent.locks.ReentrantLock@6bc9f3b5[Locked by thread Thread-3]
-        // Thread-3 failed to acquire:java.util.concurrent.locks.ReentrantLock@74b890e6[Locked by thread Thread-2]
+        // Thread-2 failed to acquire:java.util.concurrent.locks.ReentrantLock.md@6bc9f3b5[Locked by thread Thread-3]
+        // Thread-3 failed to acquire:java.util.concurrent.locks.ReentrantLock.md@74b890e6[Locked by thread Thread-2]
         if (lock1.tryLock()) {
             System.out.println(Thread.currentThread().getName() + " is running");
             if (lock2.tryLock()) {

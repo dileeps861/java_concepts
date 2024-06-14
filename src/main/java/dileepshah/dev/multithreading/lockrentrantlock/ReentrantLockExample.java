@@ -10,11 +10,11 @@ import java.util.concurrent.locks.Lock;
  * Created by dileepshah on 2024-06-14
  * <p>
  *
- * This class is used to show how to use ReentrantLock. ReentrantLock is used to synchronize access to a resource.
- * ReentrantLock is a lock that can be acquired multiple times by the same thread.
+ * This class is used to show how to use ReentrantLock.md. ReentrantLock.md is used to synchronize access to a resource.
+ * ReentrantLock.md is a lock that can be acquired multiple times by the same thread.
  * </p>
  *
- * - Note: Below are interfaces that ReentrantLock implements.
+ * - Note: Below are interfaces that ReentrantLock.md implements.
  * @see java.util.concurrent.locks.Lock
  *
  * Implementations of Lock:
