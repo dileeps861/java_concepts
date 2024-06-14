@@ -1,4 +1,4 @@
-package dileepshah.dev.multithreading.deadlock;
+package dileepshah.dev.multithreading.lockrentrantlock.deadlock;
 
 import dileepshah.dev.multithreading.lockrentrantlock.ThreadWithTryLock;
 
