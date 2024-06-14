@@ -13,6 +13,16 @@ import java.util.concurrent.TimeUnit;
  * Also, it provides a thread pool that allows multiple threads to execute tasks concurrently.
  * Executors are efficient in terms of both time and memory usage as they manage threads internally and threads are
  * cached in a thread pool.
+ *
+ * - Note: Below are interfaces that Executors implement.
+ * @see java.util.concurrent.ScheduledExecutorService
+ * @see java.util.concurrent.ExecutorService
+ *
+ * Implementations of Executors:
+ * @see java.util.concurrent.Executors
+ * @see java.util.concurrent.ScheduledThreadPoolExecutor
+ * @see java.util.concurrent.ThreadPoolExecutor
+ *
  */
 public class ExecutorsExample {
     public static void main(String[] args) {
