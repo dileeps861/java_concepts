@@ -1,4 +1,4 @@
-# Java concepts demo
+# Fundamental OS and Java concepts demonstration
 
 ## Concurrency Library
 
