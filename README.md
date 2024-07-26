@@ -1,7 +1,7 @@
 # Fundamental OS and Java concepts demonstration
 
 ## Concurrency Library
-Want to get a little more info about the mutex, conditional variables or semaphores which are the core of the multithreading? Read about them a bit more here: [MutexAndCVIntro.md](src/main/java/dileepshah/dev/os/concurrency/MutexAndCVIntro.md)
+Want to get a little more info about the mutex (locks), conditional variables or semaphores which are the core of the multithreading? Read about them a bit more here: [MutexAndCVIntro.md](src/main/java/dileepshah/dev/os/concurrency/MutexAndCVIntro.md)
 ### Overview
 This library provides implementations of various concurrency primitives and executor services using OS-level threads. The components include a blocking queue, a delayed queue, a fixed-size executor service, and a scheduled executor service built on top of the fixed-size executor service.
 
