@@ -40,6 +40,22 @@ A scheduled executor service that builds on top of the fixed-size executor servi
 - **Integration with Fixed-Size Executor**: Leverages the fixed-size executor service to execute tasks.
 - **Efficient Scheduling**: Uses a priority queue and a worker thread to manage task scheduling and execution.
 
+#### Simple Unfair Read-Write Lock [SimpleUnfairReadWriteLock.java](src/main/java/dileepshah/dev/os/concurrency/SimpleUnfairReadWriteLock.java)
+A custom implementation of an unfair read-write lock that manages access to shared resources in a multithreaded environment. This lock allows multiple readers to access the resource simultaneously, but only one writer at a time, and does not guarantee fairness, which might lead to writer or reader starvation.
+
+##### Key Features:
+- **Read and Write Lock Mechanisms**: Allows multiple threads to read simultaneously or one thread to write exclusively.
+- **Atomic Operations**: Utilizes atomic operations like `compareAndSet` to manage lock states without traditional locking mechanisms.
+- **Busy-Waiting Concurrency Control**: Employs busy-waiting loops to handle lock acquisition and release, optimizing response times at the cost of CPU usage.
+- **Starvation Possibility**: As an unfair lock, it does not prevent potential starvation of writers or readers, which allows for greater throughput under less contentious conditions.
+
+##### Implementation Details:
+- **Read Lock Acquisition**: Ensures that no write operation is in progress and atomically increases the reader count.
+- **Write Lock Acquisition**: Blocks new readers and waits for active readers to finish before allowing write operations to proceed.
+- **Efficient State Management**: Uses `AtomicInteger` and `AtomicReference` to manage state changes and ensure thread safety.
+
+This lock is designed for scenarios where the overhead of fairness is less critical than performance, making it suitable for high-performance applications where read operations significantly outnumber write operations.
+
 ### Usage Examples
 
 #### Blocking Queue
