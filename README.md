@@ -93,6 +93,24 @@ An enhanced implementation of a concurrent key-value store that utilizes segment
 - **Exception Handling**: Validates input and handles exceptions by throwing `IllegalArgumentException` for invalid keys or values.
 
 
+#### SimpleCriterionBasedConcurrentRateLimiter[SimpleCriterionBasedConcurrentRateLimiter.java](src/main/java/dileepshah/dev/os/concurrency/SimpleCriterionBasedConcurrentRateLimiter.java)
+
+A rate limiter implementation that uses a key-value store to manage rate limiters for different access criteria. Each access criterion has its own rate limiter, allowing for independent rate limiting rules.
+
+##### Key Features:
+- **Criterion-Based Rate Limiting**: Manages rate limiting independently for different access criteria.
+- **Thread-Safe Operations**: Ensures safe access and modifications to the rate limiter store using `ReentrantLock`.
+- **Dynamic Management**: Automatically creates a new rate limiter for new access criteria.
+- **Customizable Limits**: Allows configuration of the time window and the maximum number of allowed requests per window.
+
+##### Implementation Details:
+- **Initialization**: Initializes an `ImprovedSimpleConcurrentKVStore` to store rate limiters for different access criteria.
+- **Rate Limiter Creation**: Creates a new `SimpleGenericConcurrentRateLimiter` for new access criteria and stores it in the key-value store.
+- **Thread Safety**: Uses `ReentrantLock` to ensure thread-safe access and modification of the key-value store.
+- **Request Access**: Delegates access requests to the appropriate rate limiter based on the access criteria.
+- **Exception Handling**: Handles invalid keys and values by throwing `IllegalArgumentException`.
+
+
 ### Usage Examples
 
 #### Blocking Queue
@@ -156,6 +174,79 @@ try {
 
 scheduledExecutorService.shutdown();
 System.out.println("Scheduled executor service has shut down.");
+```
+##### SimpleCriterionBasedConcurrentRateLimiter
+
+To test the `SimpleCriterionBasedConcurrentRateLimiter` in a multithreaded environment with multiple IP address criteria, you can use the following `main` method:
+
+```java
+package dileepshah.dev.os.concurrency;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+/**
+ * Main class to test SimpleCriterionBasedConcurrentRateLimiter in a multithreaded environment.
+ */
+public class SimpleCriterionBasedConcurrentRateLimiterTest {
+
+    public static void main(String[] args) {
+        final int numberOfThreads = 10;
+        final long requestWindow = 1000; // 1 second
+        final long allowedNoOfRequests = 5; // Allow 5 requests per second
+
+        // Instantiate the rate limiter
+        SimpleCriterionBasedConcurrentRateLimiter<String> rateLimiter = new SimpleCriterionBasedConcurrentRateLimiter<>(requestWindow, allowedNoOfRequests);
+
+        // Create a thread pool
+        ExecutorService executor = Executors.newFixedThreadPool(numberOfThreads);
+
+        // Define IP addresses as criteria
+        String[] ipAddresses = {
+            "192.168.0.1", "192.168.0.2", "192.168.0.3",
+            "192.168.0.4", "192.168.0.5"
+        };
+
+        // Define a task that requests access
+        Runnable createAccessTask(String ipAddress) {
+            return () -> {
+                for (int i = 0; i < 10; i++) {
+                    boolean isAllowed = rateLimiter.requestAccess(ipAddress);
+                    if (isAllowed) {
+                        System.out.println(ipAddress + " was allowed access.");
+                    } else {
+                        System.out.println(ipAddress + " was denied access.");
+                    }
+                    try {
+                        // Simulate requests at intervals
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
+                }
+            };
+        }
+
+        // Submit the tasks to the executor for each IP address
+        for (String ipAddress : ipAddresses) {
+            executor.submit(createAccessTask(ipAddress));
+        }
+
+        // Shutdown the executor
+        executor.shutdown();
+        try {
+            if (!executor.awaitTermination(800, TimeUnit.MILLISECONDS)) {
+                executor.shutdownNow(); // Cancel currently executing tasks
+            }
+        } catch (InterruptedException e) {
+            executor.shutdownNow();
+        }
+
+        // Final output to check the last state
+        System.out.println("Rate limiter test completed.");
+    }
+}
 ```
 
 ### Conclusion
