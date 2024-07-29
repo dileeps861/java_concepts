@@ -50,6 +50,15 @@ public class ImprovedSimpleConcurrentKVStore<K,V> {
         kvStoreForHash.put(key, value);
     }
 
+    public boolean containsKey(K key){
+        try {
+            this.get(key);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
     private int hash(K key) {
         return Math.abs(Objects.hash(key) % this.numberOfSegments);
     }
