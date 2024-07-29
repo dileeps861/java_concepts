@@ -1,0 +1,32 @@
+<svg viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="250" cy="150" r="120" fill="none" stroke="black" stroke-width="2"/>
+
+    <!-- Process slots -->
+    <circle cx="250" cy="30" r="25" fill="lightblue" stroke="black"/>
+    <circle cx="370" cy="150" r="25" fill="lightgreen" stroke="black"/>
+    <circle cx="250" cy="270" r="25" fill="lightyellow" stroke="black"/>
+    <circle cx="130" cy="150" r="25" fill="lightpink" stroke="black"/>
+
+    <!-- Process labels -->
+    <text x="250" y="35" text-anchor="middle" font-size="16">P1</text>
+    <text x="370" y="155" text-anchor="middle" font-size="16">P2</text>
+    <text x="250" y="275" text-anchor="middle" font-size="16">P3</text>
+    <text x="130" y="155" text-anchor="middle" font-size="16">P4</text>
+
+    <!-- Arrow -->
+    <path d="M 250 150 L 350 70" fill="none" stroke="red" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+    <!-- Arrowhead marker -->
+    <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="red"/>
+        </marker>
+    </defs>
+
+    <text x="250" y="150" text-anchor="middle" font-size="14">CPU</text>
+
+    <!-- Time quantum -->
+    <text x="400" y="40" text-anchor="start" font-size="14">Time Quantum</text>
+    <line x1="400" y1="50" x2="480" y2="50" stroke="black" stroke-width="2"/>
+    <text x="440" y="70" text-anchor="middle" font-size="14">10ms</text>
+</svg>
