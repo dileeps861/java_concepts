@@ -77,7 +77,7 @@ A basic implementation of a thread-safe key-value store that supports concurrent
 
 ---
 
-#### Improved Concurrent Key-Value Store [ImprovedKVStore.java](src/main/java/dileepshah/dev/os/concurrency/ImprovedKVStore.java)
+#### Improved Concurrent Key-Value Store [ImprovedSimpleConcurrentKVStore.java](src/main/java/dileepshah/dev/os/concurrency/ImprovedSimpleConcurrentKVStore.java)
 An enhanced implementation of a concurrent key-value store that utilizes segment-based locking to improve concurrency and performance. This approach divides the store into segments, each with its own lock, allowing for more granular control over access.
 
 ##### Key Features:

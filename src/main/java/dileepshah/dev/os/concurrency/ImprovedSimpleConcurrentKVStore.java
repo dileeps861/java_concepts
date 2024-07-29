@@ -5,13 +5,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class ImprovedSimpleconcurrentKVStore<K,V> {
+public class ImprovedSimpleConcurrentKVStore<K,V> {
     private static final int DEFAULT_SEGMENTS = 16;
     private final SimpleConcurrentKVStore<K, V>[] segments;
     private final int numberOfSegments;
 
     @SuppressWarnings("unchecked")
-    public ImprovedSimpleconcurrentKVStore(int numberOfSegments) {
+    public ImprovedSimpleConcurrentKVStore(int numberOfSegments) {
         this.segments = new SimpleConcurrentKVStore[numberOfSegments];
         this.numberOfSegments = numberOfSegments;
         for (int i = 0; i < numberOfSegments; i++) {
@@ -19,7 +19,7 @@ public class ImprovedSimpleconcurrentKVStore<K,V> {
         }
     }
 
-    public ImprovedSimpleconcurrentKVStore() {
+    public ImprovedSimpleConcurrentKVStore() {
         this(DEFAULT_SEGMENTS);
     }
 
@@ -55,7 +55,7 @@ public class ImprovedSimpleconcurrentKVStore<K,V> {
     }
 
     public static void main(String[] args) {
-        ImprovedSimpleconcurrentKVStore<Integer, String> improvedKVStore = new ImprovedSimpleconcurrentKVStore<>();
+        ImprovedSimpleConcurrentKVStore<Integer, String> improvedKVStore = new ImprovedSimpleConcurrentKVStore<>();
 
         // Creating a thread pool with 5 threads
         ExecutorService executor = Executors.newFixedThreadPool(5);
