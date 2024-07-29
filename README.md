@@ -56,6 +56,43 @@ A custom implementation of an unfair read-write lock that manages access to shar
 
 This lock is designed for scenarios where the overhead of fairness is less critical than performance, making it suitable for high-performance applications where read operations significantly outnumber write operations.
 
+### SimpleConcurrentKVStore and ImprovedKVStore README Documentation
+
+---
+
+#### Simple Concurrent Key-Value Store [SimpleConcurrentKVStore.java](src/main/java/dileepshah/dev/os/concurrency/SimpleConcurrentKVStore.java)
+A basic implementation of a thread-safe key-value store that supports concurrent access using explicit locking mechanisms. This class ensures that multiple threads can safely read from and write to the store without data corruption.
+
+##### Key Features:
+- **Thread-Safe Operations**: Ensures safe access and modifications to the key-value store by multiple threads using `ReentrantLock`.
+- **Basic CRUD Operations**: Supports basic operations such as `get`, `put`, and `delete`.
+- **Exception Handling**: Validates input and handles exceptions by throwing `IllegalArgumentException` for invalid keys or values.
+- **Lock-Based Concurrency Control**: Uses `ReentrantLock` to manage access to the store, providing mutual exclusion.
+
+##### Implementation Details:
+- **Get Operation**: Acquires the lock, checks if the key is valid and present, and retrieves the value.
+- **Put Operation**: Acquires the lock, validates the key and value, and stores the key-value pair.
+- **Delete Operation**: Acquires the lock, checks if the key is valid and present, and removes the key-value pair.
+- **Thread Safety**: Uses `ReentrantLock` to ensure that only one thread can access the critical section of code at a time.
+
+---
+
+#### Improved Concurrent Key-Value Store [ImprovedKVStore.java](src/main/java/dileepshah/dev/os/concurrency/ImprovedKVStore.java)
+An enhanced implementation of a concurrent key-value store that utilizes segment-based locking to improve concurrency and performance. This approach divides the store into segments, each with its own lock, allowing for more granular control over access.
+
+##### Key Features:
+- **Segment-Based Locking**: Divides the key-value store into multiple segments, each managed by a separate `SimpleConcurrentKVStore`, to reduce contention.
+- **Improved Concurrency**: Allows multiple threads to operate on different segments simultaneously, enhancing throughput.
+- **Scalable Design**: The number of segments can be configured to balance the trade-off between concurrency and memory usage.
+- **Thread-Safe Operations**: Ensures safe access and modifications to the key-value store using segment-specific locking mechanisms.
+
+##### Implementation Details:
+- **Initialization**: Creates a configurable number of segments, each as an instance of `SimpleConcurrentKVStore`.
+- **Hashing**: Uses a hash function to determine the segment for a given key, ensuring even distribution of keys across segments.
+- **Segment Access**: Delegates `get`, `put`, and `delete` operations to the appropriate segment based on the hashed key.
+- **Exception Handling**: Validates input and handles exceptions by throwing `IllegalArgumentException` for invalid keys or values.
+
+
 ### Usage Examples
 
 #### Blocking Queue
