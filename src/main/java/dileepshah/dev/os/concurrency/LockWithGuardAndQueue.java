@@ -30,7 +30,7 @@ public class LockWithGuardAndQueue {
         while (!guard.compareAndSet(false, true)) {
             // Guard not available, spin until we get it
         }
-        System.out.println("trying lock" + Thread.currentThread());
+
         // Try to acquire the actual lock (mutex)
         if (!mutex.compareAndSet(false, true)) {
             // If mutex is held by another thread, park current thread and add to wait queue
