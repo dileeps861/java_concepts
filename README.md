@@ -271,7 +271,7 @@ This library provides robust concurrency primitives and executor services for ha
 ### Barrier/ Cyclic Barriers
 
 ### Semaphore
-
+    - Semaphore is like giving exclusive access
 ### Exchanger
 
 You can find the details about `Exchanger` [here in Exchanger.md](src/main/java/dileepshah/dev/multithreading/exchanger/Exchanger.md).
